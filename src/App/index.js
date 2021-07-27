@@ -6,13 +6,9 @@ import Header from './Header'
 import Footer from './Footer'
 import Popup from '../Popup'
 
-export const PopupContext = createContext()
-
 export default function App() {
-
     const [list, setList] = useState([])
     const [search, setSearch] = useState('')
-    const openState = useState()
 
     const filteredList = list.filter(c => c.name.toLowerCase().includes(search))
 
@@ -25,15 +21,11 @@ export default function App() {
 
     return list.length ? <main>
 
-        <PopupContext.Provider value={openState}>
-
-            <Popup />
-
+        <Popup>
             <Header list={filteredList} onInputChange={setSearch} />
 
             <CountriesList list={filteredList} />
-
-        </PopupContext.Provider>
+        </Popup>
 
         <Footer />
 

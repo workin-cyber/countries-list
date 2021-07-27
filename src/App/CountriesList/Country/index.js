@@ -1,5 +1,5 @@
 import './country.css'
-import { PopupContext } from '../../../App'
+import { PopupContext } from '../../../Popup'
 import { useContext } from 'react'
 
 export default function Country({ country }) {

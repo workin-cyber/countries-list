@@ -1,12 +1,17 @@
-import { useContext } from 'react'
 import './popup.css'
-import { PopupContext } from '../App'
+import { createContext, useState } from 'react'
 
-export default function Popup() {
+export const PopupContext = createContext()
 
-    const [open, setOpen] = useContext(PopupContext)
+export default function Popup({ children }) {
 
-    return open ? <div className='overlay' onClick={() => setOpen(false)}>
-        <div className='popup'>{open}</div>
-    </div> : null
+    const openState = useState()
+    const [open, setOpen] = openState
+
+    return <PopupContext.Provider value={openState}>
+        {children}
+        {open ? <div className='overlay' onClick={() => setOpen(false)}>
+            <div className='popup'>{open}</div>
+        </div> : null}
+    </PopupContext.Provider>
 }
