@@ -1,10 +1,12 @@
 import axios from 'axios'
 import './app.css'
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState, createContext } from 'react'
 import CountriesList from './CountriesList'
 import Header from './Header'
 import Footer from './Footer'
 import Popup from '../Popup'
+
+export const SearchContext = createContext()
 
 export default function App() {
     const [list, setList] = useState([])
@@ -22,7 +24,9 @@ export default function App() {
     return list.length ? <main>
 
         <Popup>
-            <Header list={filteredList} onInputChange={setSearch} />
+            <SearchContext.Provider value={setSearch}>
+                <Header list={filteredList} />
+            </SearchContext.Provider>
 
             <CountriesList list={filteredList} />
         </Popup>
